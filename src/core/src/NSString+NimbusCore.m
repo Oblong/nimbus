@@ -47,9 +47,12 @@ NI_FIX_CATEGORY_BUG(NSStringNimbusCore)
 - (CGFloat)heightWithFont:(UIFont*)font
        constrainedToWidth:(CGFloat)width
             lineBreakMode:(NSLineBreakMode)lineBreakMode {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   return [self sizeWithFont:font
           constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)
               lineBreakMode:lineBreakMode].height;
+#pragma clang diagnostic pop
 }
 // COV_NF_END
 

@@ -89,10 +89,15 @@ CGSize NISizeOfStringWithLabelProperties(NSString *string, CGSize constrainedToS
   CGSize size = CGSizeZero;
 
   if (numberOfLines == 1) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     size = [string sizeWithFont:font forWidth:constrainedToSize.width lineBreakMode:lineBreakMode];
-
+#pragma clang diagnostic pop
   } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     size = [string sizeWithFont:font constrainedToSize:constrainedToSize lineBreakMode:lineBreakMode];
+#pragma clang diagnostic pop
     if (numberOfLines > 0) {
       size.height = MIN(size.height, numberOfLines * lineHeight);
     }
@@ -127,7 +132,7 @@ NSRange NIMakeNSRangeFromCFRange(CFRange range) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 NSString* NIMD5HashFromData(NSData* data) {
   unsigned char result[CC_MD5_DIGEST_LENGTH];
-  CC_MD5(data.bytes, data.length, result);
+  CC_MD5(data.bytes, (CC_LONG)data.length, result);
 
   return [NSString stringWithFormat:
           @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
@@ -141,7 +146,7 @@ NSString* NIMD5HashFromData(NSData* data) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 NSString* NISHA1HashFromData(NSData* data) {
   unsigned char result[CC_SHA1_DIGEST_LENGTH];
-  CC_SHA1(data.bytes, data.length, result);
+  CC_SHA1(data.bytes, (CC_LONG)data.length, result);
 
   return [NSString stringWithFormat:
           @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",

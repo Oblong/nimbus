@@ -119,6 +119,7 @@ NI_FIX_CATEGORY_BUG(UIViewController_MyCustomCategory);
 /**
  * Creates an opaque UIColor object from a byte-value color definition.
  */
+#undef RGBCOLOR
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 
 /**
